@@ -1,50 +1,14 @@
-@include('layouts.navigation')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="container mx-auto mb-4 px-4">
+            Resultados da busca para "{{ request('query') }}"
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Você está conectado!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mx-auto mb-5 px-4">
-        <div class="row justify-content-end">
-            <div class="col-4">
-            <form action="{{ route('noticias.search') }}" method="GET">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="query" placeholder="Search">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="row mb-4">
-            <div class="col-6">
-                <h1>Noticias</h1>
-                @if ($message = Session::get('success'))
-                <div class="alert alert-sucess">
-                    {{ $message }}
-                </div>
-                @endif
-            </div>
-            <div class="col-6 text-end">
-                <a href="{{ route('noticias.create') }}" class="btn btn-primary">Criar Noticia</a>
-            </div>
-        </div>
-        <div class="row mb-4">
             <div class="col-12">
-                @if($noticias->count())
+                @if($noticias->isNotEmpty())
                 <table id="myTable" class="table align-middle">
                     <thead>
                         <tr>
@@ -78,12 +42,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div>
-                    {{ $noticias->links() }}
-                </div>
                 @else
                 <p>No news found.</p>
                 @endif
             </div>
         </div>
+    </div>
 </x-app-layout>

@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
 class Noticia extends Model
 {
     use HasFactory;
+    use Searchable;
 
     protected $fillable = [
         'titulo',
@@ -24,6 +26,14 @@ class Noticia extends Model
         if ($description = $filters['descricao'] ?? false) {
             $query->where('descricao', 'like','%'.$description.'%');
         }
+    }
+
+    public function toSearchableArray() {
+        return [
+            'id' => $this->id,
+            'titulo' => $this->titulo,
+            'descricao' => $this->descricao,
+        ];
     }
 
     public function storeArquivos($arquivo) {
