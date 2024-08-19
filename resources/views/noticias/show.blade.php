@@ -5,17 +5,16 @@
         </h2>
     </x-slot>
 
-    <div class="container mx-auto px-4">
-        <div>
-            {{ $noticia->titulo }}
-        </div>
-        <div>
-            {{ $noticia->descricao }}
-        </div>
-        <div>
-            @if ($noticia->url)
-                <img src="{{ asset($noticia->url) }}" alt="{{ $noticia->titulo }}">
-            @endif
+    <div class="container mx-auto my-4 px-4">
+        <div class="row">
+            <div class="col-6">
+                {{ $noticia->descricao }}
+            </div>
+            <div class="col-6">
+                @if ($noticia->url)
+                    <img src="{{ asset($noticia->url) }}" alt="{{ $noticia->titulo }}">
+                @endif
+            </div>
         </div>
     </div>
 </x-app-layout>

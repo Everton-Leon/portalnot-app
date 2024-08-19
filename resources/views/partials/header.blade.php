@@ -1,5 +1,8 @@
 <div class="row">
     <div class="col-12 bg-warning text-end">
+    <a href="{{ route('home') }}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-4">
+            Notícias
+        </a>
         @if (Route::has('login'))
         @auth
         <a href="{{ url('/dashboard') }}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
